@@ -2,6 +2,7 @@ import { Container, Typography, Box } from '@mui/material';
 import Cardevent from '../../components/Cardevent';
 import Navbar from '../../components/Navbar';
 import Divider from '@mui/material/Divider';
+import { blue } from '@mui/material/colors';
 
 export default function Home() {
     const events = [
@@ -30,18 +31,41 @@ export default function Home() {
                 cep: '',
 
             }
+        }, 
+        {
+            title: "Música ao vivo",
+            date: "10 de junho de 2023",
+            ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
+            description: "",
+            locale: {
+                rua: 'Ricardo Gigante',
+                numero: '420',
+                bairro: 'Santo Padre',
+                cep: '',
+
+            }
         }
+        
     ];
     return (
-        <Box >
+        <Box sx={{background:'#ADD8E6'}}>
             < Navbar />
                 <Container>
-                <Container >
-                    <Typography>Divulgue seu evento</Typography>
+                <Container>
+                    <Typography sx={{ marginTop:5, fontSize:'40px', fontWeight:'bold', color:'#1E90FF', display:'flex', 
+                    justifyContent:'center', textTransform:'uppercase'}}>
+                        Encontre eventos. Faça memórias!
+                    </Typography>
                 </Container>
                 
-                <Divider sx={{marginTop: 10, marginBottom: 10}}/>
-                <Container sx={{display: 'flex', justifyContent: 'center'}}>
+                <Divider sx={{marginTop: 5, marginBottom: 5}}/>
+
+                <Container>
+                    <Typography sx={{fontSize:'20px', fontWeight:'bold', display:'flex', justifyContent:'center', textTransform:'uppercase', color: 'white' }}>
+                        Eventos próximos de você!
+                    </Typography>
+                </Container>
+                <Container sx={{display: 'flex', justifyContent: 'center', marginTop: 3}}>
                     {
                         events.map((event) => (
                             <Cardevent title={event.title} date={event.date} ImageLink={event.ImageLink} description={event.description} locale={event.locale}/>  
