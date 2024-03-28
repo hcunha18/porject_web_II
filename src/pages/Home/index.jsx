@@ -1,6 +1,7 @@
 import { Container, Typography, Box } from '@mui/material';
 import Cardevent from '../../components/Cardevent';
 import Navbar from '../../components/Navbar';
+import Footerp from '../../components/Footer';
 import Divider from '@mui/material/Divider';
 import { blue } from '@mui/material/colors';
 
@@ -50,7 +51,7 @@ export default function Home() {
     return (
         <Box sx={{background:'#ADD8E6'}}>
             < Navbar />
-                <Container>
+            <Container>
                 <Container>
                     <Typography sx={{ marginTop:5, fontSize:'40px', fontWeight:'bold', color:'#1E90FF', display:'flex', 
                     justifyContent:'center', textTransform:'uppercase'}}>
@@ -73,6 +74,7 @@ export default function Home() {
                     }
                 </Container>
             </Container>
+            <Footerp></Footerp>
         </Box>
     );
 }
