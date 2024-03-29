@@ -1,35 +1,21 @@
 import React from 'react';
+import { Container, Typography, Box, Divider } from '@mui/material';
 
 function Footer() {
   return (
-    <footer className="bg-dark text-center text-white">
-      <div className="container p-4 pb-0">
-        <section className="mb-4">
-          <a href="#!" className="btn btn-outline-light m-1" role="button">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#!" className="btn btn-outline-light m-1" role="button">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="#!" className="btn btn-outline-light m-1" role="button">
-            <i className="fab fa-google"></i>
-          </a>
-          <a href="#!" className="btn btn-outline-light m-1" role="button">
-            <i className="fab fa-instagram"></i>
-          </a>
-          <a href="#!" className="btn btn-outline-light m-1" role="button">
-            <i className="fab fa-linkedin"></i>
-          </a>
-          <a href="#!" className="btn btn-outline-light m-1" role="button">
-            <i className="fab fa-github"></i>
-          </a>
-        </section>
-      </div>
-
-      <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © {new Date().getFullYear()} Seu Nome ou Nome da Empresa. Todos os direitos reservados.
-      </div>
-    </footer>
+    <Container  > 
+      <Box sx={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+        <Box sx={{marginRight: '33rem', width: 100}}>
+          <Typography >ddd</Typography>
+        </Box>
+        <Box sx={{marginRight: '33rem', width: 300}}>
+          <Typography>Descrição do site</Typography>
+        </Box>
+        <Box>
+          <Typography>ddd</Typography>    
+        </Box>
+      </Box>
+    </Container>
   );
 }
 

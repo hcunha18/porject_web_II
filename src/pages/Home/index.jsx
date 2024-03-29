@@ -1,9 +1,32 @@
-import { Container, Typography, Box } from '@mui/material';
+import { Container, Typography, Box} from '@mui/material';
 import Cardevent from '../../components/Cardevent';
 import Navbar from '../../components/Navbar';
-import Footerp from '../../components/Footer';
+import Footer from '../../components/Footer';
 import Divider from '@mui/material/Divider';
 import { blue } from '@mui/material/colors';
+import Searchbar from '../../components/Searchbar';
+import SpeedDial from '@mui/material/SpeedDial';
+import SpeedDialIcon from '@mui/material/SpeedDialIcon';
+import SpeedDialAction from '@mui/material/SpeedDialAction';
+import FileCopyIcon from '@mui/icons-material/FileCopyOutlined';
+import SaveIcon from '@mui/icons-material/Save';
+import PrintIcon from '@mui/icons-material/Print';
+import ShareIcon from '@mui/icons-material/Share';
+import { createSvgIcon } from '@mui/material/utils';
+
+const PlusIcon = createSvgIcon(
+    // credit: plus icon from https://heroicons.com/
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+    </svg>,
+    'Plus',
+  );
 
 export default function Home() {
     const events = [
@@ -48,15 +71,28 @@ export default function Home() {
         }
         
     ];
+    
+    const actions = [
+        { icon: <PlusIcon />, name: 'Criar Evento' },
+        { icon: <SaveIcon />, name: 'Meus Eventos' },
+        // { icon: <PrintIcon />, name: 'Print' },
+        { icon: <ShareIcon />, name: 'Compartilhar Evento' },
+      ];
     return (
-        <Box sx={{background:'#ADD8E6'}}>
+        <Box /*sx={{background:'#ADD8E6'}}*/>
             < Navbar />
             <Container>
-                <Container>
+                <Container sx={{width: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
                     <Typography sx={{ marginTop:5, fontSize:'40px', fontWeight:'bold', color:'#1E90FF', display:'flex', 
-                    justifyContent:'center', textTransform:'uppercase'}}>
-                        Encontre eventos. Faça memórias!
+                    justifyContent:'center', }}>
+                        <span style={{color: 'black', fontStyle: 'italic'}}>play</span>Events
                     </Typography>
+                    <Typography sx={{ marginTop:5, fontSize:'20px', color:'#666666', display:'flex', 
+                    justifyContent:'center' }}>
+                        Encontre os melhores eventos e construa mémorias. 
+                    </Typography>
+
+                    <Searchbar />
                 </Container>
                 
                 <Divider sx={{marginTop: 5, marginBottom: 5}}/>
@@ -74,7 +110,23 @@ export default function Home() {
                     }
                 </Container>
             </Container>
-            <Footerp></Footerp>
+            <Box sx={{ height: 0, transform: 'translateZ(0px)', flexGrow: 1, marginRight: '15rem' }}>
+                <SpeedDial
+                    ariaLabel="SpeedDial basic example"
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                    icon={<SpeedDialIcon />}
+                >
+                    {actions.map((action) => (
+                    <SpeedDialAction
+                        key={action.name}
+                        icon={action.icon}
+                        tooltipTitle={action.name}
+                    />
+                    ))}
+                </SpeedDial>
+            </Box>
+            <Divider sx={{marginTop: 5, marginBottom: 5, width: '100%'}}/>
+            <Footer></Footer>
         </Box>
     );
 }
