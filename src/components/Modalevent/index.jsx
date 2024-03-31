@@ -29,7 +29,7 @@ export default function Modalevent(props) {
 
   return (
     <div style={{width: '10rem'}}>
-      <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleOpen}>Open modal</Button>
+      <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleOpen}>Ver Detalhes</Button>
       <Modal
         open={open}
         onClose={handleClose}
