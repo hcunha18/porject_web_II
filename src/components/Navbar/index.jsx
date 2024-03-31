@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import Modallogin from '../Modallogin';
 // import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['Eventos', 'Em alta', 'Melhores preços'];
@@ -20,6 +21,8 @@ function Navbar() {
   let logged = false;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -153,8 +156,8 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> : <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}}>Entrar</Button>}
-
+          </Box> : < Modallogin /> }
+          {/* <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleClickLogin}>Entrar</Button> */}
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
