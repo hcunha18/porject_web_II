@@ -13,6 +13,7 @@ import SaveIcon from '@mui/icons-material/Save';
 import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
 import { createSvgIcon } from '@mui/material/utils';
+import Map from '../../components/Map';
 
 const PlusIcon = createSvgIcon(
     // credit: plus icon from https://heroicons.com/
@@ -39,8 +40,8 @@ export default function Home() {
                 rua: 'Aristoteres Braga',
                 numero: '777',
                 bairro: 'São Martins',
-                cep: '',
-
+                cidade: 'Leopoldina',
+                cep: '36700001'
             }
         },
         {
@@ -52,8 +53,8 @@ export default function Home() {
                 rua: 'Jucelino Kubsheck',
                 numero: '312',
                 bairro: 'Santo Agostinho',
-                cep: '',
-
+                cidade: 'Cataguases',
+                cep: '36772258'
             }
         }, 
         {
@@ -65,8 +66,8 @@ export default function Home() {
                 rua: 'Ricardo Gigante',
                 numero: '420',
                 bairro: 'Santo Padre',
-                cep: '',
-
+                cidade: 'Leopoldina',
+                cep: '36062000'
             }
         }
         
@@ -80,6 +81,7 @@ export default function Home() {
       ];
     return (
         <Box /*sx={{background:'#ADD8E6'}}*/>
+            {/* <Map></Map> */}
             < Navbar />
             <Container>
                 <Container sx={{width: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
@@ -98,14 +100,17 @@ export default function Home() {
                 <Divider sx={{marginTop: 5, marginBottom: 5}}/>
 
                 <Container>
-                    <Typography sx={{fontSize:'20px', fontWeight:'bold', display:'flex', justifyContent:'center', textTransform:'uppercase', color: 'white' }}>
+                    <Typography sx={{fontSize:'20px', fontWeight:'bold', display:'flex', justifyContent:'center', textTransform:'uppercase', color: 'black' }}>
                         Eventos próximos de você!
                     </Typography>
                 </Container>
                 <Container sx={{display: 'flex', justifyContent: 'center', marginTop: 3}}>
                     {
                         events.map((event) => (
-                            <Cardevent title={event.title} date={event.date} ImageLink={event.ImageLink} description={event.description} locale={event.locale}/>  
+                            <div >
+                                <Cardevent title={event.title} date={event.date} ImageLink={event.ImageLink} description={event.description} locale={event.locale}/> 
+                            </div>
+                             
                         ))
                     }
                 </Container>

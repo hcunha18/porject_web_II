@@ -12,6 +12,7 @@ import { red } from '@mui/material/colors';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Button } from '@mui/material';
 import Modalevent from '../Modalevent';
+import ModalMap from '../ModalMap';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -54,7 +55,7 @@ export default function Cardevent(props) {
         alt="Paella dish"
       />
       <CardContent>
-        <Typography>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro}</Typography>
+        <Typography>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro}, <br/>Cidade: {props.locale.cidade}</Typography>
         <Typography variant="body2" color="text.secondary">
           {props.description}
         </Typography>
@@ -62,6 +63,7 @@ export default function Cardevent(props) {
       <CardActions disableSpacing>
       {/* <Button variant="contained" onClick={handleClick} >Ver Evento</Button> */}
       <Modalevent title={props.title} locale = {props.locale} ImageLink = {props.ImageLink}/>
+      <ModalMap title={props.title} locale = {props.locale}/>
         {/* <IconButton aria-label="add to favorites">
           <FavoriteIcon />
         </IconButton>

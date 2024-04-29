@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
 import { CardMedia, Typography } from '@mui/material';
+import Map from '../Map';
 
 const style = {
   position: 'absolute',
@@ -18,7 +19,7 @@ const style = {
   pb: 3,
 };
 
-export default function Modalevent(props) {
+export default function ModalMap(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -29,7 +30,7 @@ export default function Modalevent(props) {
 
   return (
     <div style={{width: '10rem'}}>
-      <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleOpen}>Ver Detalhes</Button>
+      <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleOpen}>ver mapa</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -38,18 +39,23 @@ export default function Modalevent(props) {
       >
         <Box sx={{ ...style, width: '50rem', display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
             <Typography sx={{color: '#1876d2', fontWeight: 'bold', fontSize: '2rem'}}>{props.title}</Typography>
-            <CardMedia
+            
+            {/* <CardMedia
                 component="img"
                 height="400"
                 width="20"
                 image={props.ImageLink}
                 alt="Paella dish"
-            />
-            <Box sx={{width: '100%', textAlign: 'start'}}>
+            /> */}
+            <Box>
+                <Map title={props.title} cep = {props.locale.cep}></Map>
+                
+            </Box>
+            {/* <Box sx={{width: '100%', textAlign: 'start'}}>
                 <Typography sx={{color: '#1876d2', fontWeight: 'bold', fontSize: '1.5rem'}} >Local:</Typography>
                 <Typography sx={{color: '#666666', fontWeight: 'bold', fontSize: '1.5rem'}}>Rua: {props.locale.rua},<br/> Número: {props.locale.numero}. <br/>Bairro: {props.locale.bairro} <br/>Cidade: {props.locale.cidade} </Typography>
 
-            </Box>
+            </Box> */}
            
         </Box>
       </Modal>
