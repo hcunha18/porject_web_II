@@ -41,7 +41,7 @@ export default function Home() {
                 numero: '777',
                 bairro: 'São Martins',
                 cidade: 'Leopoldina',
-                cep: '36700001'
+                cep: '36774104'
             }
         },
         {

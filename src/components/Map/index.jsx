@@ -7,12 +7,12 @@ import './style.css'
 export default function Map(props){
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
-        googleMapsApiKey: "AIzaSyAOYxxwboN41I_MWG73Jv6OUYWWFDLAsP8"
+        googleMapsApiKey: "ALTERAR CHAVE"
     })
     const [position, setPosition] = useState({ lat: -0, lng: 0 });
 
     useEffect(() => {
-        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${props.cep}&key=AIzaSyAOYxxwboN41I_MWG73Jv6OUYWWFDLAsP8`;
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${props.cep}&key=ALTERAR CHAVE`;
         console.log(props.cep) 
         fetch(url)
             .then(response => response.json())
