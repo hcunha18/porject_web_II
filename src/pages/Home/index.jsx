@@ -69,6 +69,32 @@ export default function Home() {
                 cidade: 'Leopoldina',
                 cep: '36062000'
             }
+        },
+        {
+            title: "Música ao vivo",
+            date: "10 de junho de 2023",
+            ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
+            description: "",
+            locale: {
+                rua: 'Ricardo Gigante',
+                numero: '420',
+                bairro: 'Santo Padre',
+                cidade: 'Leopoldina',
+                cep: '36062000'
+            }
+        },
+        {
+            title: "Música ao vivo",
+            date: "10 de junho de 2023",
+            ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
+            description: "",
+            locale: {
+                rua: 'Ricardo Gigante',
+                numero: '420',
+                bairro: 'Santo Padre',
+                cidade: 'Leopoldina',
+                cep: '36062000'
+            }
         }
         
     ];
@@ -80,16 +106,35 @@ export default function Home() {
         { icon: <ShareIcon />, name: 'Compartilhar Evento' },
       ];
     return (
-        <Box /*sx={{background:'#ADD8E6'}}*/>
-            {/* <Map></Map> */}
+        <Box >
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+                @import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@400..700&family=Ole&family=Permanent+Marker&family=Sirin+Stencil&display=swap');
+            </style>
             < Navbar />
             <Container>
                 <Container sx={{width: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center'}}>
-                    <Typography sx={{ marginTop:5, fontSize:'40px', fontWeight:'bold', color:'#1E90FF', display:'flex', 
+                    <Typography sx={{ marginTop:5, 
+                    fontSize:'40px', 
+                    fontWeight:'bold',  
+                    display:'flex', 
                     justifyContent:'center', }}>
-                        <span style={{color: 'black', fontStyle: 'italic'}}>play</span>Events
+                        <span style={{color: 'black',
+                        fontFamily: "Edu VIC WA NT Beginner", 
+                        }}>
+                            play
+                        </span>
+                        <span style={{color: '#1E90FF',
+                        fontFamily: "Permanent Marker" 
+                        }}>
+                            Events
+                        </span>
                     </Typography>
-                    <Typography sx={{ marginTop:5, fontSize:'20px', color:'#666666', display:'flex', 
+
+                    <Typography sx={{ marginTop:5, 
+                    fontSize:'20px', 
+                    color:'#666666', 
+                    display:'flex', 
                     justifyContent:'center' }}>
                         Encontre os melhores eventos e construa mémorias. 
                     </Typography>
@@ -104,7 +149,7 @@ export default function Home() {
                         Eventos próximos de você!
                     </Typography>
                 </Container>
-                <Container sx={{display: 'flex', justifyContent: 'center', marginTop: 3}}>
+                <Container sx={{display: 'grid', gridTemplateColumns: "repeat(3, 1fr)", columnGap: "10px", rowGap: "40px",justifyContent: 'center', marginTop: 3}}>
                     {
                         events.map((event) => (
                             <div >
@@ -130,8 +175,8 @@ export default function Home() {
                     ))}
                 </SpeedDial>
             </Box>
-            <Divider sx={{marginTop: 5, marginBottom: 5, width: '100%'}}/>
-            <Footer></Footer>
+            {/* <Divider sx={{marginTop: 5, marginBottom: 5, width: '100%'}}/> */}
+            <Footer style={{minWidth: "100vh"}}/>
         </Box>
     );
 }

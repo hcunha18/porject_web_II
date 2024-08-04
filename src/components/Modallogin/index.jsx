@@ -19,7 +19,6 @@ const style = {
   transform: 'translate(-50%, -50%)',
   width: 400,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
   boxShadow: 24,
   pt: 2,
   px: 4,
@@ -45,14 +44,22 @@ export default function Modallogin() {
 
   return (
     <div>
-      <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleOpen}>Entrar</Button>
+      <Button sx={{width: '8rem', 
+        background: 'white', 
+        color: '#1976d2', 
+        borderRadius: 8, 
+        fontWeight: 'bold'
+        }} 
+        onClick={handleOpen}>
+          Entrar
+        </Button>
       <Modal
         open={open}
         onClose={handleClose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+        <Box sx={{ ...style, width: 340, height: 410, display: 'flex', alignItems: 'center', justifyContent: 'space-around',flexDirection: 'column', borderRadius: 10}}>
           <Typography sx={{color: '#1876d2', fontWeight: 'bold', fontSize: '2rem'}}>Entrar</Typography>
           <FormControl variant="standard" sx={{margin: '2rem', width: "15rem"}}>
                 <InputLabel htmlFor="input-with-icon-adornment">
@@ -87,7 +94,15 @@ export default function Modallogin() {
                         }
                     />
         </FormControl>
-        <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold', marginTop: '5rem'}} onClick={handleOpen}>Login</Button>
+        <Button sx={{width: '8rem', 
+          background: 'white', 
+          color: '#1976d2', 
+          borderRadius: 8, 
+          fontWeight: 'bold', 
+          marginTop: '5rem'}} 
+          onClick={handleOpen}>
+            Login
+          </Button>
         </Box>
       </Modal>
     </div>
