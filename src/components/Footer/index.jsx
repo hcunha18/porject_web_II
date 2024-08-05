@@ -12,10 +12,10 @@ function Footer() {
         <div class="wave" id="wave4"></div>
       </div>
 
-      <Typography sx={{fontSize: '10rem'}}>Descrição</Typography>
-      <Typography sx={{fontSize: '2rem'}}>Este site tem o intuito de te apresentar todos os eventos que estão ocorrendo próximos de você, tornando ainda mais facil o ato de colecionar momentos.</Typography>
+      <Typography sx={{fontSize: '0.8rem'}}>Descrição</Typography>
+      <Typography sx={{fontSize: '0.6rem'}}>Este site tem o intuito de te apresentar todos os eventos que estão ocorrendo próximos de você, tornando ainda mais facil o ato de colecionar momentos.</Typography>
 
-      <p>&copy; playEvents</p>
+      <p style={{fontSize: '0.4rem'}}>&copy; playEvents</p>
       </Box >
   );
 }
