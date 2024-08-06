@@ -58,7 +58,7 @@ export default function Home() {
             }
         }, 
         {
-            title: "Música ao vivo",
+            title: "Música ao vivo Na Casa do vinicius",
             date: "10 de junho de 2023",
             ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
             description: "",
@@ -71,7 +71,7 @@ export default function Home() {
             }
         },
         {
-            title: "Música ao vivo",
+            title: "Música ao vivo Na casa do Dino",
             date: "10 de junho de 2023",
             ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
             description: "",
@@ -139,7 +139,7 @@ export default function Home() {
                         Encontre os melhores eventos e construa mémorias. 
                     </Typography>
 
-                    <Searchbar />
+                    <Searchbar events={events} />
                 </Container>
                 
                 <Divider sx={{marginTop: 5, marginBottom: 5}}/>
