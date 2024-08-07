@@ -14,6 +14,7 @@ import PrintIcon from '@mui/icons-material/Print';
 import ShareIcon from '@mui/icons-material/Share';
 import { createSvgIcon } from '@mui/material/utils';
 import Map from '../../components/Map';
+import { useNavigate } from 'react-router-dom';
 
 const PlusIcon = createSvgIcon(
     // credit: plus icon from https://heroicons.com/
@@ -47,7 +48,7 @@ export default function Home() {
         {
             title: "Jantar Social",
             date: "25 de Novembro de 2020",
-            ImageLink: "https://th.bing.com/th/id/R.d09cfe16687fcdfb2662c6c2cd2df406?rik=qtQZHJEpZH%2brqQ&riu=http%3a%2f%2fwww.cmoeventos.com.br%2fwp-content%2fuploads%2f2018%2f06%2fEspa%c3%a7o-para-eventos.jpg&ehk=LeimD83OmmO86bqwqfX3Pz%2bYP8t4k0CwUEVmJucLSqI%3d&risl=&pid=ImgRaw&r=0",
+            ImageLink: "https://th.bing.com/th/id/R.dd1603d87d692f839c808fd41c01b7c5?rik=7Sr%2fddU6koU5gA&pid=ImgRaw&r=0",
             description: "",
             locale: {
                 rua: 'Jucelino Kubsheck',
@@ -98,13 +99,19 @@ export default function Home() {
         }
         
     ];
+
+    const navigate = useNavigate();
     
     const actions = [
-        { icon: <PlusIcon />, name: 'Criar Evento' },
-        { icon: <SaveIcon />, name: 'Meus Eventos' },
+        { icon: <PlusIcon />, name: 'Criar Evento', onclick: (() => navigate("CreateEvent/"))},
+        { icon: <SaveIcon />, name: 'Meus Eventos', onclick: (() => navigate("/")) },
         // { icon: <PrintIcon />, name: 'Print' },
-        { icon: <ShareIcon />, name: 'Compartilhar Evento' },
+        { icon: <ShareIcon />, name: 'Compartilhar Evento', onclick: (() => navigate("/")) },
       ];
+
+    function redirectEvent() {
+
+    }
     return (
         <Box >
             <style>
@@ -171,11 +178,11 @@ export default function Home() {
                         key={action.name}
                         icon={action.icon}
                         tooltipTitle={action.name}
+                        onClick = {action.onclick}
                     />
                     ))}
                 </SpeedDial>
             </Box>
-            {/* <Divider sx={{marginTop: 5, marginBottom: 5, width: '100%'}}/> */}
             <Footer style={{minWidth: "100vh"}}/>
         </Box>
     );
