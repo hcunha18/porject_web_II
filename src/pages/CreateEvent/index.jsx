@@ -1,14 +1,19 @@
-import { Container, Typography, Box} from '@mui/material';
+import { Container, Typography, Box, TextareaAutosize} from '@mui/material';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import FormControl from '@mui/material/FormControl';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
 import Button from '@mui/material/Button';
-
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 
 export default function CreateEvent(){
-
+    
     return (
         <>
         <Box>
@@ -49,13 +54,36 @@ export default function CreateEvent(){
                     <FormControl variant="standard" sx={{width: '100%'}}>
                         <InputLabel htmlFor="component-simple">Nome do Evento</InputLabel>
                         <Input id="component-simple" defaultValue="" />
-                    </FormControl>
+                    </FormControl >
+                    
+                    <Box sx={{mt: 2, width: '100%', display:'flex', flexDirection: 'row'}}>
+                           
+                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                <DatePicker label="Dia do evento"/>
+                            </LocalizationProvider>
+                      
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DemoContainer components={['TimePicker']}>
+                                    <TimePicker label="Hora do evento" />
+                                </DemoContainer>
+                            </LocalizationProvider>
+
+                    </Box>
+                    
                     <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
-                        <FormControl variant="standard" sx={{marginRight: '2rem'}}>
+                        <FormControl variant="standard" sx={{marginRight: '3rem'}}>
                             <InputLabel htmlFor="component-simple">CEP</InputLabel>
                             <Input id="component-simple" defaultValue="" />
                         </FormControl>
-                        <FormControl variant="standard">
+                        <FormControl variant="standard" sx={{marginRight: '3rem'}}>
+                            <InputLabel htmlFor="component-simple">Cidade</InputLabel>
+                            <Input id="component-simple" defaultValue="" />
+                        </FormControl>
+                        <FormControl variant="standard" sx={{marginRight: '3rem'}}>
+                            <InputLabel htmlFor="component-simple">Estado</InputLabel>
+                            <Input id="component-simple" defaultValue="" />
+                        </FormControl>
+                        <FormControl variant="standard" >
                             <InputLabel htmlFor="component-simple">Número</InputLabel>
                             <Input id="component-simple" defaultValue="" />
                         </FormControl>
@@ -74,13 +102,17 @@ export default function CreateEvent(){
                             <InputLabel htmlFor="component-simple">Referência</InputLabel>
                             <Input id="component-simple" defaultValue="" />
                     </FormControl>
-
+                    <FormControl variant="standard" sx={{width: "100%"}}>
+                            <InputLabel htmlFor="component-simple">Descrição do evento</InputLabel>
+                            <Input id="component-simple" defaultValue="" />
+                    </FormControl>
+                    
+                    
                     <Button variant="contained" sx={{marginTop: '4rem', width: 400}} >
                         Cadastrar
                     </Button>
                 </Box>
             </Container>
-
 
             <Footer style={{minWidth: "100vh"}}/>
         </Box>
