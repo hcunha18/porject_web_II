@@ -104,7 +104,7 @@ export default function Home() {
     
     const actions = [
         { icon: <PlusIcon />, name: 'Criar Evento', onclick: (() => navigate("CreateEvent/"))},
-        { icon: <SaveIcon />, name: 'Meus Eventos', onclick: (() => navigate("/")) },
+        // { icon: <SaveIcon />, name: 'Meus Eventos', onclick: (() => navigate("/")) },
         // { icon: <PrintIcon />, name: 'Print' },
         { icon: <ShareIcon />, name: 'Compartilhar Evento', onclick: (() => navigate("/")) },
       ];

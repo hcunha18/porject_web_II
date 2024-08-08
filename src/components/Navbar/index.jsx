@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import Modallogin from '../Modallogin';
+import ModalCadastrar from '../ModalCadastrar';
 // import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = [];
@@ -41,6 +42,9 @@ function Navbar() {
 
   return (
     <AppBar position="static">
+      <style>
+      @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+      </style>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
@@ -52,11 +56,11 @@ function Navbar() {
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
+              fontFamily: "Permanent Marker" 
             }}
           >
             Events
@@ -156,7 +160,7 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> : < Modallogin /> }
+          </Box> : <>< Modallogin/> <ModalCadastrar/></> }
           {/* <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleClickLogin}>Entrar</Button> */}
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">

@@ -17,7 +17,7 @@ const style = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 600,
   bgcolor: 'background.paper',
   boxShadow: 24,
   pt: 2,
@@ -25,7 +25,7 @@ const style = {
   pb: 3,
 };
 
-export default function Modallogin() {
+export default function ModalCadastrar() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -51,7 +51,7 @@ export default function Modallogin() {
         fontWeight: 'bold'
         }} 
         onClick={handleOpen}>
-          Entrar
+          Cadastrar
         </Button>
       <Modal
         open={open}
@@ -59,9 +59,22 @@ export default function Modallogin() {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 340, height: 410, display: 'flex', alignItems: 'center', justifyContent: 'space-around',flexDirection: 'column', borderRadius: 10}}>
-          <Typography sx={{color: '#1876d2', fontWeight: 'bold', fontSize: '2rem'}}>Entrar</Typography>
+        <Box sx={{ ...style, width: 550, height: 560, display: 'flex', alignItems: 'center', justifyContent: 'space-around',flexDirection: 'column', borderRadius: 10}}>
+          <Typography sx={{color: '#1876d2', fontWeight: 'bold', fontSize: '2rem'}}>Cadastrar</Typography>
           <FormControl variant="standard" sx={{margin: '2rem', width: "15rem"}}>
+                <InputLabel htmlFor="input-with-icon-adornment">
+                Nome
+                </InputLabel>
+                <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                    <InputAdornment position="start">
+                    </InputAdornment>
+                }
+
+                />
+          </FormControl>
+          <FormControl variant="standard" sx={{ width: "15rem"}}>
                 <InputLabel htmlFor="input-with-icon-adornment">
                 Email
                 </InputLabel>
@@ -75,7 +88,35 @@ export default function Modallogin() {
 
                 />
             </FormControl>
-            <FormControl sx={{ width: "15rem"}} variant="standard">
+            <FormControl variant="standard" sx={{ width: "15rem", marginTop: '1rem'}}>
+                <InputLabel htmlFor="input-with-icon-adornment">
+                Idade
+                </InputLabel>
+                <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                    <InputAdornment position="start">
+                    
+                    </InputAdornment>
+                }
+
+                />
+            </FormControl>
+            <FormControl variant="standard" sx={{ width: "15rem", marginTop: '1rem'}}>
+                <InputLabel htmlFor="input-with-icon-adornment">
+                Gênero
+                </InputLabel>
+                <Input
+                id="input-with-icon-adornment"
+                startAdornment={
+                    <InputAdornment position="start">
+                    
+                    </InputAdornment>
+                }
+
+                />
+            </FormControl>
+            <FormControl sx={{ width: "15rem", marginTop: '1rem'}} variant="standard">
                 <InputLabel htmlFor="standard-adornment-password">Senha</InputLabel>
                     <Input
                         id="standard-adornment-password"

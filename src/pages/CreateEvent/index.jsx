@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Container, Typography, Box, TextareaAutosize} from '@mui/material';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -11,8 +12,46 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import axios from "axios";
 
-export default function CreateEvent(){
+export default function CreateEvent () {
+
+  const [cep, setCep] = useState("");
+
+  const [address, setAddress] = useState({
+    cidade: "",
+    bairro: "",
+    rua: "",
+    estado: "",
+    numero: "",
+    complemento: "",
+  });
+
+  useEffect(() => {
+    const fetchAddress = async () => {
+      try {
+        const response = await axios.get(
+          `https://viacep.com.br/ws/${cep}/json/`
+        );
+        const data = response?.data;
+        setAddress({
+          cidade: data?.localidade || "",
+          bairro: data?.bairro || "",
+          rua: data?.logradouro,
+          estado: data?.uf,
+          numero: "",
+          complemento: "",
+        });
+      } catch (error) {
+        console.error("Erro ao buscar o endereço:", error);
+      }
+    };
+    fetchAddress();
+  }, [cep]);
+
+  const handleCepChange = (event) => {
+    setCep(event.target.value);
+  };
     
     return (
         <>
@@ -56,53 +95,53 @@ export default function CreateEvent(){
                         <Input id="component-simple" defaultValue="" />
                     </FormControl >
                     
-                    <Box sx={{mt: 2, width: '100%', display:'flex', flexDirection: 'row'}}>
+                    <Box sx={{marginTop: '2rem', width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
                            
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 <DatePicker label="Dia do evento"/>
                             </LocalizationProvider>
                       
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                <DemoContainer components={['TimePicker']}>
-                                    <TimePicker label="Hora do evento" />
-                                </DemoContainer>
+                            <LocalizationProvider dateAdapter={AdapterDayjs} >
+                                
+                                <TimePicker label="Hora do evento"  />
+                                
                             </LocalizationProvider>
 
                     </Box>
                     
-                    <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-start', width: '100%'}}>
+                    <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '2rem'}}>
                         <FormControl variant="standard" sx={{marginRight: '3rem'}}>
                             <InputLabel htmlFor="component-simple">CEP</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue="" onChange={handleCepChange} value={cep} />
                         </FormControl>
                         <FormControl variant="standard" sx={{marginRight: '3rem'}}>
                             <InputLabel htmlFor="component-simple">Cidade</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue="" value={address.cidade}/>
                         </FormControl>
                         <FormControl variant="standard" sx={{marginRight: '3rem'}}>
                             <InputLabel htmlFor="component-simple">Estado</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue="" value={address.estado}/>
                         </FormControl>
                         <FormControl variant="standard" >
                             <InputLabel htmlFor="component-simple">Número</InputLabel>
                             <Input id="component-simple" defaultValue="" />
                         </FormControl>
                     </Box>
-                    <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+                    <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '2rem'}}>
                         <FormControl variant="standard" sx={{width: "30rem"}}>
                                 <InputLabel htmlFor="component-simple">Rua</InputLabel>
-                                <Input id="component-simple" defaultValue="" />
+                                <Input id="component-simple" defaultValue=""  value={address.rua}/>
                         </FormControl>
                         <FormControl variant="standard" sx={{width: "40rem"}}>
                             <InputLabel htmlFor="component-simple">Bairro</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue="" value={address.bairro}/>
                         </FormControl>
                     </Box>
-                    <FormControl variant="standard" sx={{width: "100%"}}>
+                    <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Referência</InputLabel>
                             <Input id="component-simple" defaultValue="" />
                     </FormControl>
-                    <FormControl variant="standard" sx={{width: "100%"}}>
+                    <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Descrição do evento</InputLabel>
                             <Input id="component-simple" defaultValue="" />
                     </FormControl>

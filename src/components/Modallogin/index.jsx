@@ -48,7 +48,8 @@ export default function Modallogin() {
         background: 'white', 
         color: '#1976d2', 
         borderRadius: 8, 
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginRight: '1rem'
         }} 
         onClick={handleOpen}>
           Entrar
