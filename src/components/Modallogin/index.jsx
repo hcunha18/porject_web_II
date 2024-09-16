@@ -49,7 +49,10 @@ export default function Modallogin() {
         color: '#1976d2', 
         borderRadius: 8, 
         fontWeight: 'bold',
-        marginRight: '1rem'
+        marginRight: '1rem',
+        '&:hover':{ 
+          border: "1px solid white",
+          color: '#fff'}
         }} 
         onClick={handleOpen}>
           Entrar

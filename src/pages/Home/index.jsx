@@ -17,7 +17,6 @@ import Map from '../../components/Map';
 import { useNavigate } from 'react-router-dom';
 
 const PlusIcon = createSvgIcon(
-    // credit: plus icon from https://heroicons.com/
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -33,7 +32,7 @@ const PlusIcon = createSvgIcon(
 export default function Home() {
     const events = [
         {
-            title: "Festa da Arvore",
+            title: "Festa Universitária",
             date: "16 de Setembro de 2017",
             ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
             description: "",
@@ -48,7 +47,7 @@ export default function Home() {
         {
             title: "Jantar Social",
             date: "25 de Novembro de 2020",
-            ImageLink: "https://th.bing.com/th/id/R.dd1603d87d692f839c808fd41c01b7c5?rik=7Sr%2fddU6koU5gA&pid=ImgRaw&r=0",
+            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
             description: "",
             locale: {
                 rua: 'Jucelino Kubsheck',
@@ -59,9 +58,9 @@ export default function Home() {
             }
         }, 
         {
-            title: "Humberto Cantor",
+            title: "Música ao vivo",
             date: "10 de junho de 2023",
-            ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
+            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
             description: "",
             locale: {
                 rua: 'Ricardo Gigante',
@@ -72,9 +71,9 @@ export default function Home() {
             }
         },
         {
-            title: "Música ao vivo Na casa do Dino",
+            title: "Open Bar",
             date: "10 de junho de 2023",
-            ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
+            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
             description: "",
             locale: {
                 rua: 'Ricardo Gigante',
@@ -85,9 +84,9 @@ export default function Home() {
             }
         },
         {
-            title: "Música ao vivo Gabriel Biribinha",
+            title: "Festa Maluca",
             date: "10 de junho de 2023",
-            ImageLink: "https://img.freepik.com/psd-gratuitas/flyer-de-festa-de-dj-de-clube-postado-nas-midias-sociais_505751-4949.jpg?w=740&t=st=1711650596~exp=1711651196~hmac=03ad1675cddeb9b33fafd8d216c9f40ac8f518b943fdbfbc93be1fdc256b016f",
+            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
             description: "",
             locale: {
                 rua: 'Ricardo Gigante',
@@ -104,8 +103,6 @@ export default function Home() {
     
     const actions = [
         { icon: <PlusIcon />, name: 'Criar Evento', onclick: (() => navigate("CreateEvent/"))},
-        // { icon: <SaveIcon />, name: 'Meus Eventos', onclick: (() => navigate("/")) },
-        // { icon: <PrintIcon />, name: 'Print' },
         { icon: <ShareIcon />, name: 'Compartilhar Evento', onclick: (() => navigate("/")) },
       ];
 

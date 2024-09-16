@@ -61,15 +61,8 @@ export default function Cardevent(props) {
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-      {/* <Button variant="contained" onClick={handleClick} >Ver Evento</Button> */}
       <Modalevent title={props.title} locale = {props.locale} ImageLink = {props.ImageLink}/>
-      <ModalMap title={props.title} locale = {props.locale}/>
-        {/* <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton> */}
+      <ModalMap title={props.title} locale = {props.locale}/> 
       </CardActions>
     </Card>
   );

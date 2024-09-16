@@ -48,7 +48,10 @@ export default function ModalCadastrar() {
         background: 'white', 
         color: '#1976d2', 
         borderRadius: 8, 
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        '&:hover':{ 
+          border: "1px solid white",
+          color: '#fff'}
         }} 
         onClick={handleOpen}>
           Cadastrar

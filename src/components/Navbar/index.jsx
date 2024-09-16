@@ -119,7 +119,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            Events
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
@@ -160,7 +160,8 @@ function Navbar() {
                 </MenuItem>
               ))}
             </Menu>
-          </Box> : <>< Modallogin/> <ModalCadastrar/></> }
+
+          </Box > : <>< Modallogin/> <ModalCadastrar/></> }
           {/* <Button sx={{width: '8rem', background: 'white', color: '#1976d2', borderRadius: 8, fontWeight: 'bold'}} onClick={handleClickLogin}>Entrar</Button> */}
           {/* <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
