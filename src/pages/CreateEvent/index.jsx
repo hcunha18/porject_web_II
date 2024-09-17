@@ -10,8 +10,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { renderTimeViewClock } from "@mui/x-date-pickers";
 import axios from "axios";
 
 export default function CreateEvent () {
@@ -98,12 +97,19 @@ export default function CreateEvent () {
                     <Box sx={{marginTop: '2rem', width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
                            
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <DatePicker label="Dia do evento"/>
+                                <DatePicker label="Dia do evento" format="DD/MM/YYYY"/>
                             </LocalizationProvider>
                       
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 
-                                <TimePicker label="Hora do evento"  />
+                                <TimePicker
+                                    label="Hora do evento" 
+                                    viewRenderers={{
+                                        hours: renderTimeViewClock,
+                                        minutes: renderTimeViewClock,
+                                        seconds: renderTimeViewClock,
+                                    }}
+                                />
                                 
                             </LocalizationProvider>
 

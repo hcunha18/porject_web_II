@@ -14,6 +14,9 @@ import { Button } from '@mui/material';
 import Modalevent from '../Modalevent';
 import ModalMap from '../ModalMap';
 
+import {EditProvider } from '../../context/ContextEdit';
+
+
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
@@ -56,12 +59,12 @@ export default function Cardevent(props) {
       />
       <CardContent>
         <Typography>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro}, <br/>Cidade: {props.locale.cidade}</Typography>
-        <Typography variant="body2" color="text.secondary">
+        {/* <Typography variant="body2" color="text.secondary">
           {props.description}
-        </Typography>
+        </Typography> */}
       </CardContent>
       <CardActions disableSpacing>
-      <Modalevent title={props.title} locale = {props.locale} ImageLink = {props.ImageLink}/>
+        <Modalevent title={props.title} hours={props.hours} date={props.date} ImageLink={props.ImageLink} description={props.description} locale={props.locale}/>
       <ModalMap title={props.title} locale = {props.locale}/> 
       </CardActions>
     </Card>

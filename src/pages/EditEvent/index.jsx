@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import React from "react";
 import { Container, Typography, Box, TextareaAutosize} from '@mui/material';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -10,13 +11,17 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { renderTimeViewClock } from "@mui/x-date-pickers";
 import axios from "axios";
 
-export default function EditEvent (props) {
+import { EditContext} from "../../context/ContextEdit";
 
-  const [cep, setCep] = useState("");
+
+export default function EditEvent () {
+  const event = React.useContext(EditContext)
+  console.log(event)
+
+  const [cep, setCep] = useState(event.event.locale.cep ||"");
 
   const [address, setAddress] = useState({
     cidade: "",
@@ -92,19 +97,24 @@ export default function EditEvent (props) {
                 <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100'}}>
                     <FormControl variant="standard" sx={{width: '100%'}}>
                         <InputLabel htmlFor="component-simple">Nome do Evento</InputLabel>
-                        <Input id="component-simple" defaultValue="" />
+                        <Input id="component-simple" defaultValue={event.event.title} />
                     </FormControl >
                     
                     <Box sx={{marginTop: '2rem', width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
                            
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <DatePicker label="Dia do evento"/>
+                                <DatePicker label="Dia do evento" format="DD/MM/YYYY"/>
                             </LocalizationProvider>
                       
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                
-                                <TimePicker label="Hora do evento"  />
-                                
+                            <TimePicker
+                                    label="Hora do evento" 
+                                    viewRenderers={{
+                                        hours: renderTimeViewClock,
+                                        minutes: renderTimeViewClock,
+                                        seconds: renderTimeViewClock,
+                                    }}
+                                />
                             </LocalizationProvider>
 
                     </Box>
@@ -124,7 +134,7 @@ export default function EditEvent (props) {
                         </FormControl>
                         <FormControl variant="standard" >
                             <InputLabel htmlFor="component-simple">Número</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue={event.event.locale.numero} />
                         </FormControl>
                     </Box>
                     <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '2rem'}}>
@@ -139,11 +149,11 @@ export default function EditEvent (props) {
                     </Box>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Referência</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue={event.event.locale.referencia} />
                     </FormControl>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Descrição do evento</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" defaultValue={event.event.description} />
                     </FormControl>
                     
                     
