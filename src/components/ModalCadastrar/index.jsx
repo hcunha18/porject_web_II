@@ -11,6 +11,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext, useState } from 'react';
 
 const style = {
   position: 'absolute',
@@ -26,6 +28,20 @@ const style = {
 };
 
 export default function ModalCadastrar() {
+  const {createUser} = useContext(AuthContext);
+
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+
+  async function handleCreate() {
+    console.log("handleCreate");
+    let sucess = await createUser(email, password);
+    if (sucess) {
+      handleClose();     
+    } else alert("Entrada inválida");
+  }
+  
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -41,6 +57,13 @@ export default function ModalCadastrar() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  function handleTextFieldPassword(event) {
+    setPassword(event.target.value);
+  }
+  function handleTextFieldUser(event) {
+    setEmail(event.target.value);
+  }
 
   return (
     <div>
@@ -77,7 +100,7 @@ export default function ModalCadastrar() {
 
                 />
           </FormControl>
-          <FormControl variant="standard" sx={{ width: "15rem"}}>
+          <FormControl variant="standard" sx={{ width: "15rem"}} onChange={handleTextFieldUser}>
                 <InputLabel htmlFor="input-with-icon-adornment">
                 Email
                 </InputLabel>
@@ -119,7 +142,7 @@ export default function ModalCadastrar() {
 
                 />
             </FormControl>
-            <FormControl sx={{ width: "15rem", marginTop: '1rem'}} variant="standard">
+            <FormControl sx={{ width: "15rem", marginTop: '1rem'}} variant="standard" onChange={handleTextFieldPassword}>
                 <InputLabel htmlFor="standard-adornment-password">Senha</InputLabel>
                     <Input
                         id="standard-adornment-password"
@@ -143,7 +166,7 @@ export default function ModalCadastrar() {
           borderRadius: 8, 
           fontWeight: 'bold', 
           marginTop: '5rem'}} 
-          onClick={handleOpen}>
+          onClick={handleCreate}>
             Cadastrar
           </Button>
         </Box>

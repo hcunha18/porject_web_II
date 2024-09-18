@@ -14,16 +14,20 @@ import MenuItem from '@mui/material/MenuItem';
 import Modallogin from '../Modallogin';
 import ModalCadastrar from '../ModalCadastrar';
 // import AdbIcon from '@mui/icons-material/Adb';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 const pages = [];
-const settings = ['Profile', 'Logout'];
+const settings = ['Perfil', 'Sair'];
+
+
 
 function Navbar() {
-  let logged = false;
+  const { user, logout } = useContext(AuthContext);
+
+  let logged = user;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
-
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,6 +43,15 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const handleProfile = () =>{
+    handleCloseUserMenu()
+  }
+  const handleLogout = () =>{
+    handleCloseUserMenu();
+    logout();
+  }
+  const objectsSettings = [{ Name : 'Perfil', function : handleProfile}, { Name : 'Sair', function :  handleLogout}]
 
   return (
     <AppBar position="static">
@@ -154,9 +167,9 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {(objectsSettings || []).map((setting) => (
+                <MenuItem key={setting.Name} onClick={setting.function}>
+                  <Typography textAlign="center">{setting.Name}</Typography>
                 </MenuItem>
               ))}
             </Menu>

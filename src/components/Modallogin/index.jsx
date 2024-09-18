@@ -11,6 +11,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const style = {
   position: 'absolute',
@@ -26,6 +29,33 @@ const style = {
 };
 
 export default function Modallogin() {
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const navigate = useNavigate();
+  const { user, login } = useContext(AuthContext);
+  
+  async function handleSingIn() {
+    console.log("handleSignIn");
+    const sucess = await login(email, password);
+    if (sucess) {
+      navigate("/");
+      handleClose();     
+    } else alert("Entrada inválida");
+  }
+  
+  useEffect(() => {
+    if (user) return navigate("/");
+  }, []);
+
+  function handleTextFieldPassword(event) {
+    setPassword(event.target.value);
+  }
+  function handleTextFieldUser(event) {
+    setEmail(event.target.value);
+  }
+
+  
+
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -65,7 +95,7 @@ export default function Modallogin() {
       >
         <Box sx={{ ...style, width: 340, height: 410, display: 'flex', alignItems: 'center', justifyContent: 'space-around',flexDirection: 'column', borderRadius: 10}}>
           <Typography sx={{color: '#1876d2', fontWeight: 'bold', fontSize: '2rem'}}>Entrar</Typography>
-          <FormControl variant="standard" sx={{margin: '2rem', width: "15rem"}}>
+          <FormControl variant="standard" sx={{margin: '2rem', width: "15rem"}} onChange={handleTextFieldUser}>
                 <InputLabel htmlFor="input-with-icon-adornment">
                 email
                 </InputLabel>
@@ -80,7 +110,7 @@ export default function Modallogin() {
                 />
                 
             </FormControl>
-            <FormControl sx={{ width: "15rem"}} variant="standard">
+            <FormControl sx={{ width: "15rem"}} variant="standard" onChange={handleTextFieldPassword}>
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
                     <Input
                         id="standard-adornment-password"
@@ -104,7 +134,7 @@ export default function Modallogin() {
           borderRadius: 8, 
           fontWeight: 'bold', 
           marginTop: '5rem'}} 
-          onClick={handleOpen}>
+          onClick={handleSingIn}>
             Login
           </Button>
         </Box>

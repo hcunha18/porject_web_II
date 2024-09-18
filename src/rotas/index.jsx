@@ -6,20 +6,23 @@ const CreateEvent = lazy(() => import('../pages/CreateEvent'));
 const EditEvent = lazy(() => import('../pages/EditEvent'));
 
 import { EditProvider } from '../context/ContextEdit';
+import { AuthContextProvider } from '../context/AuthContext';
 
 export default function Rotas() {
 
   return (
-    <EditProvider>
-      <Router>
-            <Suspense fallback={<LinearProgress />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="CreateEvent" element={<CreateEvent />} />
-                <Route path="EditEvent" element={<EditEvent />} />
-              </Routes>
-            </Suspense>
-      </Router>
-    </EditProvider>
+    <AuthContextProvider>
+      <EditProvider>
+        <Router>
+              <Suspense fallback={<LinearProgress />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="CreateEvent" element={<CreateEvent />} />
+                  <Route path="EditEvent" element={<EditEvent />} />
+                </Routes>
+              </Suspense>
+        </Router>
+      </EditProvider>
+    </AuthContextProvider>
   );
 }
