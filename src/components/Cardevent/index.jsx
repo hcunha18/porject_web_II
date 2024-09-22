@@ -58,13 +58,13 @@ export default function Cardevent(props) {
         alt="Paella dish"
       />
       <CardContent>
-        <Typography>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro}, <br/>Cidade: {props.locale.cidade}</Typography>
+        <Typography>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro}, <br/>Cidade: {props.locale.cidade} </Typography>
         {/* <Typography variant="body2" color="text.secondary">
           {props.description}
         </Typography> */}
       </CardContent>
       <CardActions disableSpacing>
-        <Modalevent title={props.title} hours={props.hours} date={props.date} ImageLink={props.ImageLink} description={props.description} locale={props.locale}/>
+        <Modalevent title={props.title} hours={props.hours} date={props.date} ImageLink={props.ImageLink} description={props.description} locale={props.locale} userEmail={props.userEmail}/>
       <ModalMap title={props.title} locale = {props.locale}/> 
       </CardActions>
     </Card>

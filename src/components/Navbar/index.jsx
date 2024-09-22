@@ -24,7 +24,7 @@ const settings = ['Perfil', 'Sair'];
 
 function Navbar() {
   const { user, logout } = useContext(AuthContext);
-
+  
   let logged = user;
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);

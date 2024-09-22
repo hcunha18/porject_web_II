@@ -8,7 +8,8 @@ import { CardMedia, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import { EditContext } from '../../context/ContextEdit';
-
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const style = {
   position: 'absolute',
@@ -27,6 +28,15 @@ const style = {
 };
 
 export default function Modalevent(props) {
+  const { user, logout } = useContext(AuthContext);
+  let logged = user
+  let editDelete = false
+  if(logged && (user.user.uid == props.userEmail)){
+    editDelete = true
+  }else{
+    editDelete=false
+  }
+  
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
@@ -35,7 +45,6 @@ export default function Modalevent(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
   const {setEvent} = React.useContext(EditContext)
   const editClick = ()=>{
     setEvent({
@@ -48,7 +57,7 @@ export default function Modalevent(props) {
     })
     navigate("EditEvent/")
   }
-
+  
   return (
     <div style={{width: '10rem'}}>
       <style>
@@ -77,12 +86,20 @@ export default function Modalevent(props) {
                 <Typography sx={{color: "#000", fontSize: "1.2rem"}}>Descrição</Typography>
                 <Typography sx={{fontSize: "0.8"}}>{props.description}</Typography>
                 <Typography sx={{color: '#000', fontWeight: 'bold', fontSize: '1.2rem', marginTop: '1rem'}} >Local: <br></br><span style={{color: '#666666', fontWeight: 'bold', fontSize: '0.8rem'}}>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro} Cidade: {props.locale.cidade}</span></Typography>
+                {logged ?
+                <>
                   <Button onClick = {editClick} variant="contained" sx={{marginTop: '1rem', width: 400}}  >
                     Editar
                   </Button>                
-                <Button variant="contained" sx={{marginTop: '1rem', width: 400, bgcolor: 'red'}} >
-                  Excluir
-                </Button>
+                  <Button variant="contained" sx={{marginTop: '1rem', width: 400, bgcolor: 'red'}} >
+                    Excluir
+                  </Button>
+                </> : 
+                <>
+                  <Button onClick = {handleClose} variant="contained" sx={{marginTop: '5rem', width: 400}}  >
+                      Voltar
+                  </Button> 
+                </>}
             </Box>
            
         </Box>

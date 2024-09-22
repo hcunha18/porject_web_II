@@ -15,6 +15,8 @@ import ShareIcon from '@mui/icons-material/Share';
 import { createSvgIcon } from '@mui/material/utils';
 import Map from '../../components/Map';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { useState, useEffect } from 'react';
 
 const PlusIcon = createSvgIcon(
     <svg
@@ -30,85 +32,106 @@ const PlusIcon = createSvgIcon(
   );
 
 export default function Home() {
-    const events = [
-        {
-            title: "Festa Universitária",
-            date: "16 de Setembro de 2017",
-            hours: "20:00 AM",
-            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
-            description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
-            locale: {
-                rua: 'Aristoteres Braga',
-                numero: '777',
-                bairro: 'São Martins',
-                cidade: 'Leopoldina',
-                cep: '36772258',
-                referencia:'Sem referência'
+    const [events, setEvents] = useState([]); 
+    
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/.json');
+                const dados = response.data.events;
+                let vet = []
+                Object.keys(dados).forEach(e =>{
+                    vet.push(dados[e])
+                })
+                // console.log(vet); 
+                setEvents(vet); 
+            } catch (error) {
+                console.error("Erro ao buscar os eventos:", error);
             }
-        },
-        {
-            title: "Jantar Social",
-            date: "25 de Novembro de 2020",
-            hours: "20:00  AM",
-            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
-            description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
-            locale: {
-                rua: 'Jucelino Kubsheck',
-                numero: '312',
-                bairro: 'Santo Agostinho',
-                cidade: 'Cataguases',
-                cep: '36772258',
-                referencia:'sem referencia'
-            }
-        }, 
-        {
-            title: "Música ao vivo",
-            date: "10 de junho de 2023",
-            hours: "20:00  AM",
-            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
-            description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
-            locale: {
-                rua: 'Ricardo Gigante',
-                numero: '420',
-                bairro: 'Santo Padre',
-                cidade: 'Leopoldina',
-                cep: '36062000',
-                referencia:'sem referencia'
-            }
-        },
-        {
-            title: "Open Bar",
-            date: "10 de junho de 2023",
-            hours: "20:00 AM",
-            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
-            description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
-            locale: {
-                rua: 'Ricardo Gigante',
-                numero: '420',
-                bairro: 'Santo Padre',
-                cidade: 'Leopoldina',
-                cep: '36062000',
-                referencia:'sem referencia'
-            }
-        },
-        {
-            title: "Festa Maluca",
-            date: "10 de junho de 2023",
-            hours: "20:00 AM",
-            ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
-            description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
-            locale: {
-                rua: 'Pescadores',
-                numero: '420',
-                bairro: 'Santo Padre',
-                cidade: 'Leopoldina',
-                cep: '36062000',
-                referencia:'Sem referência'
-            }
-        }
-        
-    ];
+        };
+        fetchData();
+    }, [])
 
+    // console.log(events[0].title)
+
+    // const events = [
+    //     {
+    //         title: "Festa Universitária",
+    //         date: "16 de Setembro de 2017",
+    //         hours: "20:00 AM",
+    //         ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
+    //         description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
+    //         locale: {
+    //             rua: 'Aristoteres Braga',
+    //             numero: '777',
+    //             bairro: 'São Martins',
+    //             cidade: 'Leopoldina',
+    //             cep: '36772258',
+    //             referencia:'Sem referência'
+    //         }
+    //     },
+    //     {
+    //         title: "Jantar Social",
+    //         date: "25 de Novembro de 2020",
+    //         hours: "20:00  AM",
+    //         ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
+    //         description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
+    //         locale: {
+    //             rua: 'Jucelino Kubsheck',
+    //             numero: '312',
+    //             bairro: 'Santo Agostinho',
+    //             cidade: 'Cataguases',
+    //             cep: '36772258',
+    //             referencia:'sem referencia'
+    //         }
+    //     }, 
+    //     {
+    //         title: "Música ao vivo",
+    //         date: "10 de junho de 2023",
+    //         hours: "20:00  AM",
+    //         ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
+    //         description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
+    //         locale: {
+    //             rua: 'Ricardo Gigante',
+    //             numero: '420',
+    //             bairro: 'Santo Padre',
+    //             cidade: 'Leopoldina',
+    //             cep: '36062000',
+    //             referencia:'sem referencia'
+    //         }
+    //     },
+    //     {
+    //         title: "Open Bar",
+    //         date: "10 de junho de 2023",
+    //         hours: "20:00 AM",
+    //         ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
+    //         description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
+    //         locale: {
+    //             rua: 'Ricardo Gigante',
+    //             numero: '420',
+    //             bairro: 'Santo Padre',
+    //             cidade: 'Leopoldina',
+    //             cep: '36062000',
+    //             referencia:'sem referencia'
+    //         }
+    //     },
+    //     {
+    //         title: "Festa Maluca",
+    //         date: "10 de junho de 2023",
+    //         hours: "20:00 AM",
+    //         ImageLink: "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0",
+    //         description: "Lorem Ipsum é simplesmente uma simulação de texto da indústria tipográfica e de impressos, e vem sendo utilizado desde o século XVI, quando um impressor desconhecido pegou uma bandeja de tipos e os embaralhou para fazer um livro de modelos de tipos. Lorem Ipsum sobreviveu não só a cinco séculos, como também ao salto para a editoração eletrônica, permanecendo essencialmente inalterado. Se popularizou na década de 60, quando a Letraset lançou decalques contendo passagens de Lorem Ipsum, e mais recentemente quando passou a ser integrado a softwares de editoração eletrônica como Aldus PageMaker.",
+    //         locale: {
+    //             rua: 'Pescadores',
+    //             numero: '420',
+    //             bairro: 'Santo Padre',
+    //             cidade: 'Leopoldina',
+    //             cep: '36062000',
+    //             referencia:'Sem referência'
+    //         }
+    //     }
+        
+    // ];
     const navigate = useNavigate();
     
     const actions = [
@@ -116,9 +139,7 @@ export default function Home() {
         { icon: <ShareIcon />, name: 'Compartilhar Evento', onclick: (() => navigate("/")) },
       ];
 
-    function redirectEvent() {
-
-    }
+    let imageLink = "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0"
     return (
         <Box >
             <style>
@@ -167,7 +188,8 @@ export default function Home() {
                     {
                         events.map((event) => (
                             <div >
-                                <Cardevent title={event.title} hours={event.hours} date={event.date} ImageLink={event.ImageLink} description={event.description} locale={event.locale}/> 
+                                
+                                <Cardevent title={event.title} hours={event.hours} date={event.date} ImageLink={imageLink} description={event.description} locale={event.locale} userEmail={event.userEmail}/> 
                             </div>
                              
                         ))

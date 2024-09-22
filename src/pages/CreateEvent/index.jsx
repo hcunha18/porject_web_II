@@ -12,11 +12,47 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { renderTimeViewClock } from "@mui/x-date-pickers";
 import axios from "axios";
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 export default function CreateEvent () {
+//   let alou = axios.get('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/path/to/data.json')
+//   console.log(alou)
+const { user} = useContext(AuthContext);
+// console.log(user.user.uid)
 
+const [eventTitle, setEventTitle] = useState("");
+const [eventDate, setEventDate] = useState(null);
+const [eventHours, setEventHours] = useState(null);
+const [description, setDescription] = useState("");
+const [complemento, setComplemento] = useState("");
+const [numero, setNumero] = useState("");
+
+const handleCreateEvent = async () => {
+    const newEvent = {
+      title: eventTitle,
+      date: eventDate,
+      hours: eventHours,
+      locale: {
+        cep,
+        cidade: address.cidade,
+        estado: address.estado,
+        bairro: address.bairro,
+        rua: address.rua,
+        numero: numero,
+        complemento: complemento,
+      },
+      description,
+      userEmail: user.user.uid
+    };
+    try {
+      const response = await axios.post('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/events.json', newEvent);
+      console.log("Evento adicionado com sucesso:", response.data);
+    } catch (error) {
+      console.error("Erro ao adicionar evento:", error);
+    }
+  };
   const [cep, setCep] = useState("");
-
   const [address, setAddress] = useState({
     cidade: "",
     bairro: "",
@@ -29,21 +65,21 @@ export default function CreateEvent () {
   useEffect(() => {
     const fetchAddress = async () => {
       try {
-        const response = await axios.get(
-          `https://viacep.com.br/ws/${cep}/json/`
-        );
-        const data = response?.data;
-        setAddress({
-          cidade: data?.localidade || "",
-          bairro: data?.bairro || "",
-          rua: data?.logradouro,
-          estado: data?.uf,
-          numero: "",
-          complemento: "",
-        });
-      } catch (error) {
-        console.error("Erro ao buscar o endereço:", error);
-      }
+          const response = await axios.get(
+            `https://viacep.com.br/ws/${cep}/json/`
+          );
+          const data = response?.data;
+          setAddress({
+            cidade: data?.localidade || "",
+            bairro: data?.bairro || "",
+            rua: data?.logradouro,
+            estado: data?.uf,
+            numero: "",
+            complemento: "",
+          });
+        } catch (error) {
+          console.error("Erro ao buscar o endereço:", error);
+        }
     };
     fetchAddress();
   }, [cep]);
@@ -91,19 +127,20 @@ export default function CreateEvent () {
                 <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100'}}>
                     <FormControl variant="standard" sx={{width: '100%'}}>
                         <InputLabel htmlFor="component-simple">Nome do Evento</InputLabel>
-                        <Input id="component-simple" defaultValue="" />
+                        <Input id="component-simple" value={eventTitle} onChange={(e) => setEventTitle(e.target.value)}  />
                     </FormControl >
                     
                     <Box sx={{marginTop: '2rem', width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
                            
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <DatePicker label="Dia do evento" format="DD/MM/YYYY"/>
+                                <DatePicker label="Dia do evento" format="DD/MM/YYYY" value={eventDate} onChange={(newDate) => setEventDate(newDate)}/>
                             </LocalizationProvider>
                       
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
                                 
                                 <TimePicker
                                     label="Hora do evento" 
+                                    value={eventHours} onChange={(newHours) => setEventHours(newHours)}
                                     viewRenderers={{
                                         hours: renderTimeViewClock,
                                         minutes: renderTimeViewClock,
@@ -130,7 +167,7 @@ export default function CreateEvent () {
                         </FormControl>
                         <FormControl variant="standard" >
                             <InputLabel htmlFor="component-simple">Número</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" value={numero} onChange={(e) => setNumero(e.target.value)} />
                         </FormControl>
                     </Box>
                     <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '2rem'}}>
@@ -144,16 +181,16 @@ export default function CreateEvent () {
                         </FormControl>
                     </Box>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
-                            <InputLabel htmlFor="component-simple">Referência</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <InputLabel htmlFor="component-simple">Complemento</InputLabel>
+                            <Input id="component-simple" value={complemento} onChange={(e) => setComplemento(e.target.value)} />
                     </FormControl>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Descrição do evento</InputLabel>
-                            <Input id="component-simple" defaultValue="" />
+                            <Input id="component-simple" value={description} onChange={(e) => setDescription(e.target.value)} />
                     </FormControl>
                     
                     
-                    <Button variant="contained" sx={{marginTop: '4rem', width: 400}} >
+                    <Button variant="contained" sx={{marginTop: '4rem', width: 400}} onClick={handleCreateEvent} >
                         Cadastrar
                     </Button>
                 </Box>
