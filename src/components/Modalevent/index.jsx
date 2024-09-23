@@ -8,8 +8,11 @@ import { CardMedia, Typography } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom';
 import { EditContext } from '../../context/ContextEdit';
+import { useState, useEffect } from 'react';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import axios from 'axios';
+
 
 const style = {
   position: 'absolute',
@@ -60,7 +63,40 @@ export default function Modalevent(props) {
     })
     navigate("EditEvent/")
   }
-  // console.log(props.locale.complemento)
+
+  const [chaveEvent, setChaveEvent] = useState([]); 
+  useEffect(() => {
+    const fetchData =async () =>{
+        try{
+            const response = await axios.get('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/events/.json');
+            // console.log(response.data)
+            let vet = []
+            Object.keys(response.data).forEach(e =>{
+              vet.push(e)
+              
+            })
+            setChaveEvent(vet)
+        }catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    fetchData();
+}, [])
+
+let key = chaveEvent[props.chave]
+
+const deleteEvento = async () =>{
+  try{
+    await axios.delete(`https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/events/${key}.json`)
+    console.log("Evento deletado com sucesso")
+    handleClose()
+  }
+  catch(erro){
+    console.log("Erro ao deletar evento", erro)
+  }
+}
+
+
   return (
     <div style={{width: '10rem'}}>
       <style>
@@ -94,7 +130,7 @@ export default function Modalevent(props) {
                   <Button onClick = {editClick} variant="contained" sx={{marginTop: '1rem', width: 400}}  >
                     Editar
                   </Button>                
-                  <Button variant="contained" sx={{marginTop: '1rem', width: 400, bgcolor: 'red'}} >
+                  <Button onClick = {deleteEvento} variant="contained" sx={{marginTop: '1rem', width: 400, bgcolor: 'red'}} >
                     Excluir
                   </Button>
                 </> : 
