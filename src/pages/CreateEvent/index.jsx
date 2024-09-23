@@ -188,7 +188,7 @@ const handleCreateEvent = async () => {
                     </FormControl>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Descrição do evento</InputLabel>
-                            <Input id="component-simple" value={description} onChange={(e) => setDescription(e.target.value)} />
+                            <Input multiline id="component-simple" value={description} onChange={(e) => setDescription(e.target.value)} />
                     </FormControl>
                     
                     
