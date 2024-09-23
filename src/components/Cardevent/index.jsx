@@ -34,7 +34,8 @@ export default function Cardevent(props) {
   const handleClick = () => {
     console.log("alou")
   };
-
+  
+  const dateFormatada = new Intl.DateTimeFormat('pt-BR').format(new Date(props.date))
   return (
     <Card sx={{ maxWidth: 345, minWidth: 345, marginRight: 5 }}>
       <CardHeader
@@ -49,7 +50,7 @@ export default function Cardevent(props) {
           </IconButton>
         }
         title={props.title}
-        subheader={props.date}
+        subheader={dateFormatada}
       />
       <CardMedia
         component="img"
@@ -64,7 +65,7 @@ export default function Cardevent(props) {
         </Typography> */}
       </CardContent>
       <CardActions disableSpacing>
-        <Modalevent title={props.title} hours={props.hours} date={props.date} ImageLink={props.ImageLink} description={props.description} locale={props.locale} userEmail={props.userEmail}/>
+        <Modalevent title={props.title} hours={props.hours} date={props.date} ImageLink={props.ImageLink} description={props.description} locale={props.locale} userEmail={props.userEmail} chave={props.chave}/>
       <ModalMap title={props.title} locale = {props.locale}/> 
       </CardActions>
     </Card>

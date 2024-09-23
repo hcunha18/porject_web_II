@@ -33,7 +33,6 @@ const PlusIcon = createSvgIcon(
 
 export default function Home() {
     const [events, setEvents] = useState([]); 
-    
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -43,7 +42,6 @@ export default function Home() {
                 Object.keys(dados).forEach(e =>{
                     vet.push(dados[e])
                 })
-                // console.log(vet); 
                 setEvents(vet); 
             } catch (error) {
                 console.error("Erro ao buscar os eventos:", error);
@@ -52,9 +50,8 @@ export default function Home() {
         fetchData();
     }, [])
 
-    // console.log(events[0].title)
 
-    // const events = [
+    // const eve = [
     //     {
     //         title: "Festa Universitária",
     //         date: "16 de Setembro de 2017",
@@ -136,7 +133,7 @@ export default function Home() {
     
     const actions = [
         { icon: <PlusIcon />, name: 'Criar Evento', onclick: (() => navigate("CreateEvent/"))},
-        { icon: <ShareIcon />, name: 'Compartilhar Evento', onclick: (() => navigate("/")) },
+        // { icon: <ShareIcon />, name: 'Compartilhar Evento', onclick: (() => navigate("/")) },
       ];
 
     let imageLink = "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0"
@@ -186,10 +183,9 @@ export default function Home() {
                 </Container>
                 <Container sx={{display: 'grid', gridTemplateColumns: "repeat(3, 1fr)", columnGap: "10px", rowGap: "40px",justifyContent: 'center', marginTop: 3}}>
                     {
-                        events.map((event) => (
+                        events.map((event, key) => (
                             <div >
-                                
-                                <Cardevent title={event.title} hours={event.hours} date={event.date} ImageLink={imageLink} description={event.description} locale={event.locale} userEmail={event.userEmail}/> 
+                                <Cardevent title={event.title} hours={event.hours} date={event.date} ImageLink={imageLink} description={event.description} locale={event.locale} userEmail={event.userEmail} chave={key}/> 
                             </div>
                              
                         ))

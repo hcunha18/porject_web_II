@@ -35,7 +35,7 @@ export function AuthContextProvider(props) {
   async function createUser(user, password){
     return createUserWithEmailAndPassword(auth, user, password)
     .then((userCredential) => {
-      setUser(userCredential.user);
+      setUser(userCredential);
       return (true);
     })
     .catch((error) => {

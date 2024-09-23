@@ -15,7 +15,8 @@ export const EditProvider = (props) =>{
           bairro: "",
           cidade: "",
           referencia:""
-        }
+        },
+        chave:""
       })
     return (
         <EditContext.Provider value={{event, setEvent}}>

@@ -14,12 +14,13 @@ import { renderTimeViewClock } from "@mui/x-date-pickers";
 import axios from "axios";
 import { AuthContext } from '../../context/AuthContext';
 import { useContext } from 'react';
+import { useNavigate } from "react-router-dom";
 
 export default function CreateEvent () {
 //   let alou = axios.get('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/path/to/data.json')
 //   console.log(alou)
 const { user} = useContext(AuthContext);
-// console.log(user.user.uid)
+const navigate = useNavigate();
 
 const [eventTitle, setEventTitle] = useState("");
 const [eventDate, setEventDate] = useState(null);
@@ -48,6 +49,7 @@ const handleCreateEvent = async () => {
     try {
       const response = await axios.post('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/events.json', newEvent);
       console.log("Evento adicionado com sucesso:", response.data);
+      navigate("/")
     } catch (error) {
       console.error("Erro ao adicionar evento:", error);
     }

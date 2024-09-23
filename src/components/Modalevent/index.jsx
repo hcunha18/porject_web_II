@@ -29,12 +29,14 @@ const style = {
 
 export default function Modalevent(props) {
   const { user, logout } = useContext(AuthContext);
-  let logged = user
-  let editDelete = false
+  let logged = user 
+  
+  let editAndDelete = false
+
   if(logged && (user.user.uid == props.userEmail)){
-    editDelete = true
+    editAndDelete = true
   }else{
-    editDelete=false
+    editAndDelete=false
   }
   
   const navigate = useNavigate();
@@ -53,11 +55,12 @@ export default function Modalevent(props) {
       hours: props.hours,
       ImageLink: props.ImageLink,
       description: props.description,
-      locale: props.locale
+      locale: props.locale,
+      chave: props.chave
     })
     navigate("EditEvent/")
   }
-  
+  // console.log(props.locale.complemento)
   return (
     <div style={{width: '10rem'}}>
       <style>
@@ -85,8 +88,8 @@ export default function Modalevent(props) {
             <Box sx={{width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'start' }}>
                 <Typography sx={{color: "#000", fontSize: "1.2rem"}}>Descrição</Typography>
                 <Typography sx={{fontSize: "0.8"}}>{props.description}</Typography>
-                <Typography sx={{color: '#000', fontWeight: 'bold', fontSize: '1.2rem', marginTop: '1rem'}} >Local: <br></br><span style={{color: '#666666', fontWeight: 'bold', fontSize: '0.8rem'}}>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro} Cidade: {props.locale.cidade}</span></Typography>
-                {logged ?
+                <Typography sx={{color: '#000', fontWeight: 'bold', fontSize: '1.2rem', marginTop: '1rem'}} >Local: <br></br><span style={{color: '#666666', fontWeight: 'bold', fontSize: '0.8rem'}}>Rua: {props.locale.rua}, Número: {props.locale.numero}. Bairro: {props.locale.bairro} Cidade: {props.locale.cidade} </span></Typography>
+                {editAndDelete ?
                 <>
                   <Button onClick = {editClick} variant="contained" sx={{marginTop: '1rem', width: 400}}  >
                     Editar

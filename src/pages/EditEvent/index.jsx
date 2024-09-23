@@ -13,13 +13,73 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { renderTimeViewClock } from "@mui/x-date-pickers";
 import axios from "axios";
-
 import { EditContext} from "../../context/ContextEdit";
-
+import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+import { useContext } from "react";
 
 export default function EditEvent () {
   const event = React.useContext(EditContext)
-  console.log(event)
+//   console.log(event)
+  
+const { user} = useContext(AuthContext);
+const navigate = useNavigate();
+
+const Data = dayjs(event.event.date)
+const Hours = dayjs(event.event.hours)
+
+const [eventTitle, setEventTitle] = useState(event.event.title);
+const [eventDate, setEventDate] = useState(Data);
+const [eventHours, setEventHours] = useState(Hours);
+const [description, setDescription] = useState(event.event.description);
+const [complemento, setComplemento] = useState(event.event.locale.complemento);
+const [numero, setNumero] = useState(event.event.locale.numero);
+
+const [chaveEvent, setChaveEvent] = useState([]); 
+useEffect(() => {
+    const fetchData =async () =>{
+        try{
+            const response = await axios.get('https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/events/.json');
+            // console.log(response.data)
+            let vet = []
+            Object.keys(response.data).forEach(e =>{
+              vet.push(e)
+            })
+            setChaveEvent(vet)
+        }catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    fetchData();
+}, [])
+let key = chaveEvent[event.event.chave]
+
+const handleEditEvent = async () => {
+    const eventEdit = {
+      title: eventTitle,
+      date: eventDate,
+      hours: eventHours,
+      locale: {
+        cep,
+        cidade: address.cidade,
+        estado: address.estado,
+        bairro: address.bairro,
+        rua: address.rua,
+        numero: numero,
+        complemento: complemento
+      },
+      description: description,
+      userEmail: user.user.uid
+    };
+    try {
+      const response = await axios.patch(`https://projeto-web-ii-b3b32-default-rtdb.firebaseio.com/events/${key}.json`, eventEdit);
+      console.log("Evento alterado com sucesso:", response.data);
+      navigate("/")
+    } catch (error) {
+      console.error("Erro ao editar evento:", error);
+    }
+  };
 
   const [cep, setCep] = useState(event.event.locale.cep ||"");
 
@@ -57,7 +117,10 @@ export default function EditEvent () {
   const handleCepChange = (event) => {
     setCep(event.target.value);
   };
-    
+
+//   const Data = dayjs(event.event.date)
+//   const Hours = dayjs(event.event.hours)
+ 
     return (
         <>
         <Box>
@@ -97,18 +160,20 @@ export default function EditEvent () {
                 <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100'}}>
                     <FormControl variant="standard" sx={{width: '100%'}}>
                         <InputLabel htmlFor="component-simple">Nome do Evento</InputLabel>
-                        <Input id="component-simple" defaultValue={event.event.title} />
+                        <Input id="component-simple" defaultValue={event.event.title} onChange={(e) => setEventTitle(e.target.value)}/>
                     </FormControl >
                     
                     <Box sx={{marginTop: '2rem', width: '100%', display:'flex', flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'center'}}>
                            
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                                <DatePicker label="Dia do evento" format="DD/MM/YYYY"/>
+                                <DatePicker label="Dia do evento" format="DD/MM/YYYY" defaultValue={Data} onChange={(newDate) => setEventDate(newDate)}/>
                             </LocalizationProvider>
                       
                             <LocalizationProvider dateAdapter={AdapterDayjs} >
-                            <TimePicker
+                            <TimePicker         
+                                    defaultValue={Hours}               
                                     label="Hora do evento" 
+                                    onChange={(newHours) => setEventHours(newHours)}
                                     viewRenderers={{
                                         hours: renderTimeViewClock,
                                         minutes: renderTimeViewClock,
@@ -134,7 +199,7 @@ export default function EditEvent () {
                         </FormControl>
                         <FormControl variant="standard" >
                             <InputLabel htmlFor="component-simple">Número</InputLabel>
-                            <Input id="component-simple" defaultValue={event.event.locale.numero} />
+                            <Input id="component-simple" defaultValue={event.event.locale.numero} onChange={(e) => setNumero(e.target.value)}/>
                         </FormControl>
                     </Box>
                     <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%', marginTop: '2rem'}}>
@@ -149,15 +214,15 @@ export default function EditEvent () {
                     </Box>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Referência</InputLabel>
-                            <Input id="component-simple" defaultValue={event.event.locale.referencia} />
+                            <Input id="component-simple" defaultValue={event.event.locale.complemento} onChange={(e) => setComplemento(e.target.value)}/>
                     </FormControl>
                     <FormControl variant="standard" sx={{width: "100%", marginTop: '2rem'}}>
                             <InputLabel htmlFor="component-simple">Descrição do evento</InputLabel>
-                            <Input id="component-simple" defaultValue={event.event.description} />
+                            <Input id="component-simple" defaultValue={event.event.description} onChange={(e) => setDescription(e.target.value)}/>
                     </FormControl>
                     
                     
-                    <Button variant="contained" sx={{marginTop: '4rem', width: 400}} >
+                    <Button variant="contained" sx={{marginTop: '4rem', width: 400}} onClick={handleEditEvent} >
                         Editar
                     </Button>
                 </Box>
