@@ -17,6 +17,11 @@ import Map from '../../components/Map';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useState, useEffect } from 'react';
+import * as React from 'react';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import { AuthContext } from '../../context/AuthContext';
+import { useContext } from 'react';
 
 const PlusIcon = createSvgIcon(
     <svg
@@ -32,6 +37,14 @@ const PlusIcon = createSvgIcon(
   );
 
 export default function Home() {
+    const [myEvents, setMyEvents] = React.useState(false);
+    function handleClick() {
+        setMyEvents(true);
+    }
+
+    const { user} = useContext(AuthContext);
+    let logged = user;
+
     const [events, setEvents] = useState([]); 
     useEffect(() => {
         const fetchData = async () => {
@@ -138,6 +151,7 @@ export default function Home() {
 
     let imageLink = "https://th.bing.com/th/id/R.06db452fc12c1c27687799e8759bae75?rik=i2PMHbxsCyA2lw&riu=http%3a%2f%2fwww.aplausoeventos.com.br%2fwp-content%2fuploads%2f2019%2f11%2fevento77.jpg&ehk=FLkra0g1%2f91qxuDneGbfuXNUasTuWpk9whM5HybAUcw%3d&risl=&pid=ImgRaw&r=0"
     return (
+        <>
         <Box >
             <style>
                 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
@@ -173,16 +187,35 @@ export default function Home() {
 
                     <Searchbar events={events} />
                 </Container>
-                
-                <Divider sx={{marginTop: 5, marginBottom: 5}}/>
+                {logged ? 
+                <FormControlLabel
+                    sx={{ display: 'block', marginTop: 3 }}
+                    control={
+                    <Switch
+                        checked={myEvents}
+                        onChange={() => setMyEvents(!myEvents)}
+                        name="loading"
+                        color="primary"
+                    />
+                    }
+                    label="Meus Eventos"
+                /> : <></>
+                }
+                <Divider sx={{marginTop: 3, marginBottom: 5}}/>
 
                 <Container>
-                    <Typography sx={{fontSize:'20px', fontWeight:'bold', display:'flex', justifyContent:'center', textTransform:'uppercase', color: 'black' }}>
+                    {/* <Typography sx={{fontSize:'20px', fontWeight:'bold', display:'flex', justifyContent:'center', textTransform:'uppercase', color: 'black' }}>
                         Eventos próximos de você!
-                    </Typography>
+                    </Typography> */}
                 </Container>
                 <Container sx={{display: 'grid', gridTemplateColumns: "repeat(3, 1fr)", columnGap: "10px", rowGap: "40px",justifyContent: 'center', marginTop: 3}}>
-                    {
+                    { myEvents ? (events || []).map((event, key) => {
+                        if(user && user.user && event.userEmail === user.user.uid){
+                            return <div >
+                                    <Cardevent title={event.title} hours={event.hours} date={event.date} ImageLink={imageLink} description={event.description} locale={event.locale} userEmail={event.userEmail} chave={key}/> 
+                                </div>;
+                        }
+                    }) :
                         events.map((event, key) => (
                             <div >
                                 <Cardevent title={event.title} hours={event.hours} date={event.date} ImageLink={imageLink} description={event.description} locale={event.locale} userEmail={event.userEmail} chave={key}/> 
@@ -210,5 +243,6 @@ export default function Home() {
             </Box>
             <Footer style={{minWidth: "100vh"}}/>
         </Box>
-    );
+
+    </>);
 }

@@ -1,16 +1,25 @@
 import { createContext, useContext, useState } from "react";
 import { auth } from "../servidor/firebase";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { useEffect } from "react";
 
 export const AuthContext = createContext({});
 
 export function AuthContextProvider(props) {
   const [user, setUser] = useState(null);
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }   
+  }, [])
+
   async function login(user, password) {
     return signInWithEmailAndPassword(auth, user, password)
       .then((userCredential) => {
         setUser(userCredential);
-        return true;
+        localStorage.setItem("user", JSON.stringify(userCredential))
+        return (true);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -30,12 +39,14 @@ export function AuthContextProvider(props) {
   }
   function logout(){
     setUser(null);
+    localStorage.setItem("user", null)
   }
 
   async function createUser(user, password){
     return createUserWithEmailAndPassword(auth, user, password)
     .then((userCredential) => {
       setUser(userCredential);
+      localStorage.setItem("user", JSON.stringify(userCredential))
       return (true);
     })
     .catch((error) => {

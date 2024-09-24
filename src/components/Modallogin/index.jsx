@@ -37,7 +37,7 @@ export default function Modallogin() {
   async function handleSingIn() {
     console.log("handleSignIn");
     const sucess = await login(email, password);
-    if (sucess) {
+    if (sucess) {      
       navigate("/");
       handleClose();     
     } else alert("Entrada inválida");
